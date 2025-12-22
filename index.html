@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo de Comercios Locales - igw</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    :root {
+      --brand: #2b8290;
+      --brand2:#56cfe1;
+      --accent:#28a745;
+      --danger:#dc3545;
+
+      --bg:#0b1220;
+      --panel:#0f1a2e;
+      --card:#0f1d33;
+
+      --text:#eaf2ff;
+      --muted:#a9bbd6;
+
+      --line: rgba(255,255,255,.10);
+      --shadow: 0 18px 60px rgba(0,0,0,.40);
+      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+      --transition: all .22s ease;
+
+      --r:18px;
+      --r2:24px;
+      --max:1300px;
+
+      /* Nivel colors */
+      --bronze1:#cd7f32; --bronze2:#7a3b11;
+      --silver1:#e8edf5; --silver2:#8fa3b7;
+      --gold1:#ffd166;   --gold2:#b8860b;
+      --dia1:#b9f2ff;    --dia2:#3bb8ff;
+    }
+
+    [data-theme="light"]{
+      --bg:#f5f7fb;
+      --panel:#ffffff;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#56627a;
+      --line: rgba(16,24,40,.10);
+      --shadow: 0 18px 60px rgba(16,24,40,.10);
+      --shadow2: 0 10px 30px rgba(16,24,40,.08);
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body{
+      background:
+        radial-gradient(1000px 600px at 75% 10%, rgba(86,207,225,.18), transparent 60%),
+        radial-gradient(900px 520px at 15% 20%, rgba(128,255,219,.12), transparent 60%),
+        radial-gradient(900px 520px at 60% 90%, rgba(255,255,255,.06), transparent 62%),
+        var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      overflow-x:hidden;
+    }
+
+    .container{ width:min(var(--max), calc(100% - 32px)); margin:0 auto; }
+
+    /* ===== Header ===== */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: linear-gradient(to bottom, rgba(11,18,32,.92), rgba(11,18,32,.70));
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid var(--line);
+      box-shadow: 0 6px 22px rgba(0,0,0,.18);
+    }
+    [data-theme="light"] header{
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 6px 22px rgba(16,24,40,.06);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 0 10px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .logo{
+      width:42px; height:42px; border-radius:16px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(86,207,225,.95), rgba(86,207,225,.20)),
+        radial-gradient(circle at 70% 70%, rgba(128,255,219,.65), rgba(128,255,219,0));
+      border:1px solid rgba(86,207,225,.35);
+      box-shadow: 0 12px 32px rgba(86,207,225,.14);
+      flex:0 0 auto;
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-60%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      transform:rotate(25deg);
+      animation: shine 7s linear infinite;
+    }
+    @keyframes shine{ 0%{ transform:translateX(-40%) rotate(25deg);} 100%{ transform:translateX(40%) rotate(25deg);} }
+
+    header h1{
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 60vw;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .subhead{
+      margin-top:3px;
+      color: var(--muted);
+      font-size:12px;
+      font-weight:600;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 60vw;
+    }
+
+    .datetime-container{
+      font-size:12px;
+      color: var(--muted);
+      text-align:center;
+      margin: auto;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      box-shadow: var(--shadow2);
+      white-space:nowrap;
+    }
+    [data-theme="light"] .datetime-container{ background:#fff; }
+
+    .controls{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      min-width:0;
+    }
+
+    select, button{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow2);
+      transition: var(--transition);
+      max-width:100%;
+      font-weight:700;
+      cursor:pointer;
+    }
+    [data-theme="light"] select, [data-theme="light"] button{ background:#fff; color:var(--text); }
+    select{
+      min-width: 220px;
+    }
+    button:hover, select:hover{
+      transform: translateY(-1px);
+      border-color: rgba(86,207,225,.30);
+    }
+    button.theme-toggle{
+      width:44px; height:44px;
+      padding:0;
+      border-radius: 16px;
+      font-size: 18px;
+      background: rgba(255,255,255,.03);
+    }
+
+    /* ===== Categories ===== */
+    .categories{
+      display:flex;
+      gap:10px;
+      overflow-x:auto;
+      padding: 10px 0 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .categories::-webkit-scrollbar{ height:8px; }
+    .categories::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.10); border-radius:999px; }
+    [data-theme="light"] .categories::-webkit-scrollbar-thumb{ background: rgba(16,24,40,.12); }
+
+    .category-btn{
+      flex:0 0 auto;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor:pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow2);
+      white-space:nowrap;
+    }
+    [data-theme="light"] .category-btn{ background:#fff; }
+    .category-btn:hover{ transform: translateY(-1px); color: var(--text); }
+    .category-btn.active{
+      background: linear-gradient(135deg, rgba(86,207,225,.20), rgba(128,255,219,.14));
+      border-color: rgba(86,207,225,.38);
+      color: var(--text);
+    }
+
+    /* ===== Search ===== */
+    .search-container{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      padding: 12px 0 14px;
+    }
+
+    .search-bar{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      border-radius: var(--r2);
+      display:flex;
+      align-items:center;
+      padding: 12px 14px;
+      gap:10px;
+    }
+    [data-theme="light"] .search-bar{ background:#fff; }
+    .search-bar i{ color: var(--muted); }
+    .search-bar input{
+      width:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      color: var(--text);
+      font-size: 15px;
+      font-weight:600;
+      min-width:0;
+    }
+    .search-bar input::placeholder{ color: rgba(169,187,214,.75); }
+    [data-theme="light"] .search-bar input::placeholder{ color: rgba(86,98,122,.65); }
+
+    .toggle-container{
+      display:flex;
+      align-items:center;
+      margin: auto;
+      justify-content:space-between;
+      gap:10px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      padding: 12px 14px;
+      border-radius: var(--r2);
+      flex-wrap:wrap;
+    }
+    [data-theme="light"] .toggle-container{ background:#fff; }
+    .toggle-container span{
+      font-size: 13px;
+      font-weight:800;
+      color: var(--muted);
+    }
+    .toggle-container #toggleLabel{
+      color: var(--text);
+      font-weight:900;
+    }
+
+    .switch{ position: relative; display:inline-block; width:54px; height:28px; }
+    .switch input{ display:none; }
+    .slider{
+      position:absolute; inset:0;
+      background: rgba(255,255,255,.10);
+      border:1px solid var(--line);
+      border-radius: 999px;
+      transition:.25s ease;
+    }
+    .slider:before{
+      content:"";
+      position:absolute;
+      width:22px; height:22px;
+      left:3px; top:50%;
+      transform: translateY(-50%);
+      background:#fff;
+      border-radius:999px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.25);
+      transition:.25s ease;
+    }
+    input:checked + .slider{
+      background: rgba(24,199,126,.18);
+      border-color: rgba(24,199,126,.35);
+    }
+    input:checked + .slider:before{
+      transform: translate(26px, -50%);
+      background: #eafff4;
+    }
+
+    .results-info{
+      font-size: 13px;
+      color: var(--muted);
+      text-align:center;
+      padding: 6px 0 16px;
+    }
+
+    /* ===== Main Grid ===== */
+    main{
+      width:min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      padding: 10px 0 26px;
+    }
+
+    .card{
+      grid-column: span 4;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      position:relative;
+      cursor:pointer;
+
+      opacity:0;
+      transform: translateY(14px);
+      transition: .28s ease;
+      min-width:0;
+      isolation:isolate;
+    }
+    [data-theme="light"] .card{ background:#fff; }
+    .card.loaded{ opacity:1; transform: translateY(0); }
+    .card:hover{ transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.45); }
+    [data-theme="light"] .card:hover{ box-shadow: 0 22px 60px rgba(16,24,40,.14); }
+
+    /* Nivel bar (left) */
+    .card::before{
+      content:"";
+      position:absolute; inset:0 auto 0 0;
+      width: 7px;
+      background: rgba(255,255,255,.10);
+      z-index:2;
+    }
+    .card[data-nivel="bronce"]::before{ background: linear-gradient(180deg, var(--bronze1), var(--bronze2)); }
+    .card[data-nivel="plata"]::before{  background: linear-gradient(180deg, var(--silver1), var(--silver2)); }
+    .card[data-nivel="oro"]::before{    background: linear-gradient(180deg, var(--gold1), var(--gold2)); }
+    .card[data-nivel="diamante"]::before{background: linear-gradient(180deg, var(--dia1), var(--dia2)); }
+
+    /* Subtle tint by level */
+    .card[data-nivel="oro"]{ box-shadow: 0 18px 60px rgba(184,134,11,.10), var(--shadow); }
+    .card[data-nivel="diamante"]{ box-shadow: 0 18px 60px rgba(59,184,255,.12), var(--shadow); }
+
+    .card img{
+      width:100%;
+      height: 190px;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.05) brightness(.92);
+      transform: scale(1.02);
+      transition: .35s ease;
+    }
+    .card:hover img{ transform: scale(1.06); }
+
+    .media{
+      position:relative;
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+    }
+    .overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.10), transparent);
+      pointer-events:none;
+      z-index:1;
+    }
+
+    /* Badges */
+    .status{
+      position:absolute;
+      top:12px;
+      left:12px;
+      z-index:3;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.38);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.92);
+      font-size: 12px;
+      font-weight: 900;
+      white-space:nowrap;
+      max-width: calc(100% - 24px);
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .status i{ opacity:.95; }
+    .status.open{ border-color: rgba(2, 247, 145, 0.973); box-shadow: 0 0 3px rgb(0, 251, 255);}
+    .status.closed{ border-color: rgba(255, 0, 0, 0.985); box-shadow: 0 0 3px rgb(236, 37, 11); }
+
+    .nivel{
+      position:absolute;
+      top:12px;
+      right:12px;
+      z-index:3;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing:.2px;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      white-space:nowrap;
+      max-width: calc(100% - 24px);
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .nivel[data-nivel="bronce"]{ background: linear-gradient(135deg, rgba(205,127,50,.92), rgba(122,59,17,.76)); color:#fff; }
+    .nivel[data-nivel="plata"]{  background: linear-gradient(135deg, rgba(232,237,245,.92), rgba(143,163,183,.72)); color:#101828; }
+    .nivel[data-nivel="oro"]{    background: linear-gradient(135deg, rgba(255,209,102,.92), rgba(184,134,11,.70)); color:#2b1b00; }
+    .nivel[data-nivel="diamante"]{background: linear-gradient(135deg, rgba(185,242,255,.92), rgba(59,184,255,.70)); color:#002a44; }
+
+    .card-content{
+      padding: 14px 14px 16px;
+    }
+
+    .card-content h3{
+      font-size: 16px;
+      font-weight: 900;
+      text-align: center;
+      
+      letter-spacing:.2px;
+      text-transform: uppercase;
+      line-height:1.2;
+      margin-bottom: 6px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .card-content p{
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .tag{
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor:pointer;
+      transition:.2s ease;
+      max-width: 100%;
+    }
+    [data-theme="light"] .tag{ background:#f3f6fb; }
+    .tag:hover{
+      transform: translateY(-1px);
+      border-color: rgba(86,207,225,.35);
+      color: var(--text);
+      background: rgba(86,207,225,.10);
+    }
+
+    /* Footer hint row */
+    .hint-row{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .hint-row .go{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color: var(--text);
+      font-weight: 900;
+    }
+    .hint-row .go i{
+      width: 30px; height: 30px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      background: rgba(86,207,225,.12);
+      border: 1px solid rgba(86,207,225,.25);
+    }
+
+    /* Pagination */
+    .pagination{
+      grid-column: 1 / -1;
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin-top: 6px;
+      flex-wrap:wrap;
+    }
+    .pagination button{
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+    .pagination button:disabled{
+      opacity:.5;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    footer{
+      margin-top:auto;
+      padding: 18px 0 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align:center;
+      font-size: 13px;
+      font-weight:700;
+    }
+
+    /* Skeletons */
+    .skeleton{
+      position:relative;
+      overflow:hidden;
+      background: rgba(255,255,255,.05);
+    }
+    .skeleton::after{
+      content:"";
+      position:absolute; inset:-40% -60%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+      transform: translateX(-40%);
+      animation: sk 1.2s ease-in-out infinite;
+    }
+    @keyframes sk{
+      0%{ transform: translateX(-60%); }
+      100%{ transform: translateX(60%); }
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .card{ grid-column: span 6; }
+    }
+    @media (max-width: 768px){
+      header{ padding-bottom: 6px; }
+      header h1{ max-width: 100%; }
+      .subhead{ max-width: 100%; }
+      .datetime-container{ width:45%;color: #04ff64; margin: auto; }
+      .controls{ width:100%; justify-content:stretch; }
+      select{ width:70%; min-width:0;
+    background: #04151f; }
+    }
+    @media (max-width: 640px){
+      .container, main{ width: calc(100% - 22px); }
+      .card{ grid-column: span 12; }
+      .card img{ height: 180px; }
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+  <header>
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>🏪 GUIA DIGITAL PUBLICITARIA</h1>
+            <div class="subhead">Encontrá lo que buscás a tiempo • IGW Iglesia Web</div>
+          </div>
+        </div>
+
+        <div class="datetime-container" id="datetime"></div>
+
+        <div class="controls">
+          <select id="districtSelect">
+            <option value="todos">Todos los distritos</option>
+            <option value="1">Las Flores</option>
+            <option value="2">Rodeo</option>
+            <option value="3">Tudcum</option>
+            <option value="4">Bella Vista</option>
+            <option value="5">Villa Iglesia</option>
+          </select>
+          <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌞</button>
+        </div>
+      </div>
+
+      <div class="categories">
+        <button class="category-btn active" data-category="todos">✨ Todos</button>
+        <button class="category-btn" data-category="restaurantes">🍽️ Restaurantes</button>
+        <button class="category-btn" data-category="hoteles">🏨 Hoteles</button>
+        <button class="category-btn" data-category="peluquerias">✂️ Peluquerías</button>
+        <button class="category-btn" data-category="maxikioscos">🛒 Maxikioscos</button>
+        <button class="category-btn" data-category="supermercados">🏪 Supermercados</button>
+      </div>
+
+      <section class="search-container">
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Buscar por nombre, categoría o tags...">
+        </div>
+
+        <div class="toggle-container">
+          <span>Ver:</span>
+          <label class="switch" title="Filtrar solo abiertos">
+            <input type="checkbox" id="toggleActivos" checked>
+            <span class="slider"></span>
+          </label>
+          <span id="toggleLabel">Solo abiertos</span>
+        </div>
+      </section>
+
+      <div class="results-info" id="resultsInfo"></div>
+    </div>
+  </header>
+
+  <main id="vendorsList"></main>
+
+  <footer>
+    IGW - IGLESIA WEB
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAYS2Ga7h4dF9y_RyCcK8LJaCj-CUb1PuE",
+      authDomain: "saboresdeldistrito.firebaseapp.com",
+      projectId: "saboresdeldistrito",
+      storageBucket: "saboresdeldistrito.firebasestorage.app",
+      messagingSenderId: "814541339857",
+      appId: "1:814541339857:web:2490bb261d7aaa423ed9f0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const contenedor = document.getElementById('vendorsList');
+    const input = document.getElementById('searchInput');
+    const selectDistrito = document.getElementById('districtSelect');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const checkbox = document.getElementById('toggleActivos');
+    const label = document.getElementById('toggleLabel');
+    const resultsInfo = document.getElementById('resultsInfo');
+    const datetimeEl = document.getElementById('datetime');
+    const themeToggle = document.getElementById('themeToggle');
+
+    let mostrarSoloActivos = true;
+    let vendedores = [];
+    let currentPage = 1;
+    const itemsPerPage = 20;
+    let selectedCategory = 'todos';
+    let userLocation = null;
+    const maxDistanceKm = 10;
+
+    // ===== Theme (no changes to your data/buttons)
+    function toggleTheme() {
+      const currentTheme = document.body.dataset.theme;
+      document.body.dataset.theme = currentTheme === 'dark' ? 'light' : 'dark';
+      themeToggle.textContent = document.body.dataset.theme === 'dark' ? '🌙' : '🌞';
+    }
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // ===== Datetime
+    function updateDatetime() {
+      const now = new Date();
+      datetimeEl.textContent = now.toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'medium' });
+    }
+    setInterval(updateDatetime, 1000);
+    updateDatetime();
+
+    // ===== Distance
+    function getDistance(lat1, lng1, lat2, lng2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLng/2) * Math.sin(dLng/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+
+    // ===== Geolocalización (kept)
+    function getUserLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            userLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            if (!document.querySelector('option[value="cerca"]')) {
+              const option = document.createElement('option');
+              option.value = 'cerca';
+              option.textContent = '📍 Cerca de mí';
+              selectDistrito.prepend(option);
+            }
+            selectDistrito.value = 'cerca';
+            renderVendedores();
+          },
+          () => renderVendedores(),
+          { enableHighAccuracy: true, timeout: 8000 }
+        );
+      } else {
+        renderVendedores();
+      }
+    }
+
+    // ===== Lógica de horario (kept)
+    function estaAbierto(v) {
+      const ahora = new Date();
+      const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+      const diaActual = diasSemana[ahora.getDay()];
+      const horaActual = ahora.getHours() + ahora.getMinutes() / 60;
+
+      if (!v.dias || !Array.isArray(v.dias) || !v.dias.includes(diaActual)) return false;
+      if (!v.horarios || typeof v.horarios !== 'object') return false;
+
+      let franjasDelDia = [];
+      if (diaActual === 'sábado') franjasDelDia = v.horarios.sabado || [];
+      else if (diaActual === 'domingo') franjasDelDia = v.horarios.domingo || [];
+      else franjasDelDia = v.horarios.semana || [];
+
+      if (franjasDelDia.length === 0) return false;
+
+      return franjasDelDia.some(h => {
+        if (!h.apertura || !h.cierre) return false;
+
+        const [hA, mA] = h.apertura.split(':').map(Number);
+        const [hC, mC] = h.cierre.split(':').map(Number);
+        const horaA = hA + mA / 60;
+        const horaC = hC + mC / 60;
+
+        if (horaA > horaC) return horaActual >= horaA || horaActual < horaC;
+        return horaActual >= horaA && horaActual < horaC;
+      });
+    }
+
+    // ===== Nivel badge HTML (kept concept, improved visuals)
+    function getNivelHtml(nivel) {
+      switch ((nivel || '').toLowerCase()) {
+        case 'bronce': return '<i class="fas fa-medal"></i> Bronce';
+        case 'plata': return '<i class="fas fa-medal"></i> Plata';
+        case 'oro': return '<i class="fas fa-medal"></i> Oro';
+        case 'diamante': return '<i class="fas fa-gem"></i> Diamante';
+        default: return '<i class="fas fa-medal"></i> Bronce';
+      }
+    }
+
+    // ===== Nivel ranking (NEW: order by level, no DB changes)
+    const nivelRank = { diamante: 0, oro: 1, plata: 2, bronce: 3 };
+    function normNivel(n){
+      const v = (n || 'bronce').toString().toLowerCase().trim();
+      return ['bronce','plata','oro','diamante'].includes(v) ? v : 'bronce';
+    }
+
+    // ===== Skeletons (NEW: feels pro while loading)
+    function paintSkeletons(count = 12){
+      contenedor.innerHTML = '';
+      for(let i=0;i<count;i++){
+        const sk = document.createElement('div');
+        sk.className = 'card loaded';
+        sk.dataset.nivel = 'bronce';
+        sk.style.cursor = 'default';
+        sk.innerHTML = `
+          <div class="media">
+            <div class="skeleton" style="height:190px;"></div>
+          </div>
+          <div class="card-content">
+            <div class="skeleton" style="height:16px; width:70%; border-radius:999px; margin-bottom:10px;"></div>
+            <div class="skeleton" style="height:12px; width:45%; border-radius:999px; margin-bottom:14px;"></div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <div class="skeleton" style="height:28px; width:90px; border-radius:999px;"></div>
+              <div class="skeleton" style="height:28px; width:110px; border-radius:999px;"></div>
+              <div class="skeleton" style="height:28px; width:80px; border-radius:999px;"></div>
+            </div>
+            <div class="hint-row">
+              <span class="skeleton" style="height:12px; width:90px; border-radius:999px;"></span>
+              <span class="skeleton" style="height:30px; width:30px; border-radius:12px;"></span>
+            </div>
+          </div>
+        `;
+        contenedor.appendChild(sk);
+      }
+    }
+
+    function renderVendedores() {
+      contenedor.innerHTML = '';
+      const busqueda = input.value.toLowerCase();
+      const distrito = selectDistrito.value;
+
+      let filtrados = vendedores.filter(v =>
+        (v.nombre && v.nombre.toLowerCase().includes(busqueda)) ||
+        (v.categoria && v.categoria.toLowerCase().includes(busqueda)) ||
+        (v.tags && v.tags.some(tag => tag.toLowerCase().includes(busqueda)))
+      );
+
+      // Distrito / Cerca (kept)
+      if (distrito === 'cerca' && userLocation) {
+        filtrados = filtrados.filter(v => {
+          if (!v.ubicacion) return false;
+          const distance = getDistance(userLocation.lat, userLocation.lng, v.ubicacion.lat, v.ubicacion.lng);
+          return distance <= maxDistanceKm;
+        });
+      } else if (distrito !== 'todos') {
+        filtrados = filtrados.filter(v => v.distrito == distrito);
+      }
+
+      // Categoría (kept)
+      if (selectedCategory !== 'todos') {
+        filtrados = filtrados.filter(v => v.categoria === selectedCategory);
+      }
+
+      // Abiertos (kept)
+      if (mostrarSoloActivos) {
+        filtrados = filtrados.filter(v => estaAbierto(v));
+      }
+
+      // ✅ NEW: Orden por nivel (sin tocar Firestore/campos)
+      filtrados.sort((a,b) => {
+        const ra = nivelRank[normNivel(a.nivel)] ?? 99;
+        const rb = nivelRank[normNivel(b.nivel)] ?? 99;
+        if (ra !== rb) return ra - rb;
+
+        // Desempate: más vistos primero (si existe) y luego nombre
+        const va = (a.visualizaciones || 0);
+        const vb = (b.visualizaciones || 0);
+        if (vb !== va) return vb - va;
+
+        return (a.nombre || '').localeCompare((b.nombre || ''), 'es', { sensitivity:'base' });
+      });
+
+      // Paginación (kept)
+      const totalPages = Math.max(1, Math.ceil(filtrados.length / itemsPerPage));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const pageItems = filtrados.slice(start, end);
+
+      resultsInfo.textContent = `Mostrando ${pageItems.length} de ${filtrados.length} resultados (Página ${currentPage} de ${totalPages})`;
+
+      if (pageItems.length === 0) {
+        contenedor.innerHTML = `<p style="grid-column:1/-1;text-align:center; color:var(--muted); padding:18px 0;">😕 No se encontraron resultados</p>`;
+        return;
+      }
+
+      pageItems.forEach(v => {
+        const activo = estaAbierto(v);
+        const tagsHTML = (v.tags || []).slice(0, 7).map(t => `<span class="tag">${t}</span>`).join('');
+        const nivel = normNivel(v.nivel);
+        const categoria = v.categoria || 'Sin categoría';
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.dataset.nivel = nivel;
+
+        card.innerHTML = `
+          <div class="media">
+            <img src="${v.imagen}" alt="${v.nombre}" loading="lazy" decoding="async">
+            <div class="overlay" aria-hidden="true"></div>
+
+            <span class="status ${activo ? 'open' : 'closed'}">
+              <i class="fa-solid ${activo ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+              ${activo ? 'Abierto ahora' : 'Cerrado'}
+            </span>
+
+            <span class="nivel" data-nivel="${nivel}">${getNivelHtml(nivel)}</span>
+          </div>
+
+          <div class="card-content">
+            <h3 title="${v.nombre}">${v.nombre}</h3>
+            <p>${categoria}</p>
+            <div class="tags">${tagsHTML}</div>
+
+            <div class="hint-row">
+              <span><i class="fa-solid fa-eye"></i> Ver detalle</span>
+              <span class="go"><i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+        `;
+
+        // Click behavior (kept: NO new buttons, NO field changes)
+        card.addEventListener('click', () => {
+          updateDoc(doc(db, "comercios", v.id), {
+            visualizaciones: (v.visualizaciones || 0) + 1
+          });
+          window.location.href = `detalle.html?id=${v.id}`;
+        });
+
+        // Lazy appear (kept, improved rootMargin)
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              card.classList.add('loaded');
+              observer.unobserve(card);
+            }
+          });
+        }, { rootMargin: '140px' });
+        observer.observe(card);
+
+        contenedor.appendChild(card);
+      });
+
+      // Pagination (kept)
+      const pagination = document.createElement('div');
+      pagination.className = 'pagination';
+
+      const prevBtn = document.createElement('button');
+      prevBtn.textContent = 'Anterior';
+      prevBtn.disabled = currentPage <= 1;
+      prevBtn.addEventListener('click', () => {
+        currentPage--;
+        renderVendedores();
+      });
+      pagination.appendChild(prevBtn);
+
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = 'Siguiente';
+      nextBtn.disabled = currentPage >= totalPages;
+      nextBtn.addEventListener('click', () => {
+        currentPage++;
+        renderVendedores();
+      });
+      pagination.appendChild(nextBtn);
+
+      contenedor.appendChild(pagination);
+    }
+
+    async function cargarComercios() {
+      paintSkeletons(12);
+
+      try {
+        const snapshot = await getDocs(collection(db, "comercios"));
+        vendedores = snapshot.docs.map(docu => ({
+          id: docu.id,
+          ...docu.data()
+        }));
+        getUserLocation(); // kept: geolocalización after load
+      } catch (e) {
+        console.error("Error al cargar", e);
+        contenedor.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#ff4d6d;padding:18px 0;">Error al cargar comercios.</p>`;
+      }
+    }
+
+    // Events (kept)
+    input.addEventListener('input', () => {
+      currentPage = 1;
+      renderVendedores();
+    });
+    selectDistrito.addEventListener('change', () => {
+      currentPage = 1;
+      renderVendedores();
+    });
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedCategory = btn.dataset.category;
+        currentPage = 1;
+        renderVendedores();
+      });
+    });
+    checkbox.addEventListener('change', () => {
+      mostrarSoloActivos = checkbox.checked;
+      label.textContent = checkbox.checked ? "Solo abiertos" : "Todos los locales";
+      currentPage = 1;
+      renderVendedores();
+    });
+
+    // Default theme (kept)
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.dataset.theme = 'dark';
+      themeToggle.textContent = '🌙';
+    }
+
+    cargarComercios();
+
+    // Refresh open/close
+    setInterval(() => {
+      renderVendedores();
+    }, 60000);
+  </script>
+</body>
+</html>
