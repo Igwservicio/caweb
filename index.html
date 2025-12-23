@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo de Comercios Locales - igw</title>
+  <title>Guía Digital Publicitaria</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
+    /* === TU CSS (base) === */
     :root {
       --brand: #2b8290;
       --brand2:#56cfe1;
       --accent:#28a745;
       --danger:#dc3545;
 
-      --bg:#0b1220;
+      --bg:#121c30;
       --panel:#0f1a2e;
       --card:#0f1d33;
 
@@ -31,7 +32,6 @@
       --r2:24px;
       --max:1300px;
 
-      /* Nivel colors */
       --bronze1:#cd7f32; --bronze2:#7a3b11;
       --silver1:#e8edf5; --silver2:#8fa3b7;
       --gold1:#ffd166;   --gold2:#b8860b;
@@ -62,10 +62,8 @@
       flex-direction:column;
       overflow-x:hidden;
     }
-
     .container{ width:min(var(--max), calc(100% - 32px)); margin:0 auto; }
 
-    /* ===== Header ===== */
     header{
       position:sticky; top:0; z-index:50;
       background: linear-gradient(to bottom, rgba(11,18,32,.92), rgba(11,18,32,.70));
@@ -73,26 +71,13 @@
       border-bottom:1px solid var(--line);
       box-shadow: 0 6px 22px rgba(0,0,0,.18);
     }
-    [data-theme="light"] header{
-      background: rgba(255,255,255,.82);
-      box-shadow: 0 6px 22px rgba(16,24,40,.06);
-    }
+    [data-theme="light"] header{ background: rgba(255,255,255,.82); box-shadow: 0 6px 22px rgba(16,24,40,.06); }
 
     .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px 0 10px;
-      flex-wrap:wrap;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:14px 0 10px; flex-wrap:wrap;
     }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
     .logo{
       width:42px; height:42px; border-radius:16px;
       background:
@@ -100,13 +85,10 @@
         radial-gradient(circle at 70% 70%, rgba(128,255,219,.65), rgba(128,255,219,0));
       border:1px solid rgba(86,207,225,.35);
       box-shadow: 0 12px 32px rgba(86,207,225,.14);
-      flex:0 0 auto;
-      position:relative;
-      overflow:hidden;
+      flex:0 0 auto; position:relative; overflow:hidden;
     }
     .logo:after{
-      content:"";
-      position:absolute; inset:-60%;
+      content:""; position:absolute; inset:-60%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
       transform:rotate(25deg);
       animation: shine 7s linear infinite;
@@ -114,49 +96,25 @@
     @keyframes shine{ 0%{ transform:translateX(-40%) rotate(25deg);} 100%{ transform:translateX(40%) rotate(25deg);} }
 
     header h1{
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing:.2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width: 60vw;
-      display:flex;
-      align-items:center;
-      gap:10px;
+      font-size: 18px; font-weight: 800; letter-spacing:.2px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      max-width: 60vw; display:flex; align-items:center; gap:10px;
     }
     .subhead{
-      margin-top:3px;
-      color: var(--muted);
-      font-size:12px;
-      font-weight:600;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width: 60vw;
+      margin-top:3px; color: var(--muted); font-size:12px; font-weight:600;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 60vw;
     }
-
     .datetime-container{
-      font-size:12px;
-      color: var(--muted);
-      text-align:center;
-      margin: auto;
-      padding:8px 10px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      border-radius: 999px;
-      box-shadow: var(--shadow2);
-      white-space:nowrap;
+      font-size:12px; color: var(--muted); text-align:center;
+      margin: auto; padding:8px 10px; border:1px solid var(--line);
+      background: rgba(255,255,255,.03); border-radius: 999px;
+      box-shadow: var(--shadow2); white-space:nowrap;
     }
     [data-theme="light"] .datetime-container{ background:#fff; }
 
     .controls{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      min-width:0;
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end; min-width:0;
     }
 
     select, button{
@@ -172,111 +130,58 @@
       cursor:pointer;
     }
     [data-theme="light"] select, [data-theme="light"] button{ background:#fff; color:var(--text); }
-    select{
-      min-width: 220px;
-    }
-    button:hover, select:hover{
-      transform: translateY(-1px);
-      border-color: rgba(86,207,225,.30);
-    }
+    select{ min-width: 220px; }
+    button:hover, select:hover{ transform: translateY(-1px); border-color: rgba(86,207,225,.30); }
     button.theme-toggle{
-      width:44px; height:44px;
-      padding:0;
-      border-radius: 16px;
-      font-size: 18px;
-      background: rgba(255,255,255,.03);
+      width:44px; height:44px; padding:0;
+      border-radius: 16px; font-size: 18px; background: rgba(255,255,255,.03);
     }
 
-    /* ===== Categories ===== */
     .categories{
-      display:flex;
-      gap:10px;
-      overflow-x:auto;
-      padding: 10px 0 12px;
-      -webkit-overflow-scrolling: touch;
+      display:flex; gap:10px; overflow-x:auto;
+      padding: 10px 0 12px; -webkit-overflow-scrolling: touch;
     }
     .categories::-webkit-scrollbar{ height:8px; }
     .categories::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.10); border-radius:999px; }
     [data-theme="light"] .categories::-webkit-scrollbar-thumb{ background: rgba(16,24,40,.12); }
 
     .category-btn{
-      flex:0 0 auto;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 800;
-      cursor:pointer;
-      transition: var(--transition);
-      box-shadow: var(--shadow2);
-      white-space:nowrap;
+      flex:0 0 auto; border:1px solid var(--line);
+      background: rgba(255,255,255,.03); color: var(--muted);
+      padding: 10px 14px; border-radius: 999px;
+      font-size: 13px; font-weight: 800; cursor:pointer;
+      transition: var(--transition); box-shadow: var(--shadow2); white-space:nowrap;
     }
     [data-theme="light"] .category-btn{ background:#fff; }
     .category-btn:hover{ transform: translateY(-1px); color: var(--text); }
     .category-btn.active{
       background: linear-gradient(135deg, rgba(86,207,225,.20), rgba(128,255,219,.14));
-      border-color: rgba(86,207,225,.38);
-      color: var(--text);
+      border-color: rgba(86,207,225,.38); color: var(--text);
     }
 
-    /* ===== Search ===== */
-    .search-container{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      padding: 12px 0 14px;
-    }
-
+    .search-container{ display:flex; flex-direction:column; gap:12px; padding: 12px 0 14px; }
     .search-bar{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow);
-      border-radius: var(--r2);
-      display:flex;
-      align-items:center;
-      padding: 12px 14px;
-      gap:10px;
+      border:1px solid var(--line); background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow); border-radius: var(--r2);
+      display:flex; align-items:center; padding: 12px 14px; gap:10px;
     }
     [data-theme="light"] .search-bar{ background:#fff; }
     .search-bar i{ color: var(--muted); }
     .search-bar input{
-      width:100%;
-      border:none;
-      outline:none;
-      background:transparent;
-      color: var(--text);
-      font-size: 15px;
-      font-weight:600;
-      min-width:0;
+      width:100%; border:none; outline:none; background:transparent;
+      color: var(--text); font-size: 15px; font-weight:600; min-width:0;
     }
-    .search-bar input::placeholder{ color: rgba(169,187,214,.75); }
-    [data-theme="light"] .search-bar input::placeholder{ color: rgba(86,98,122,.65); }
 
     .toggle-container{
-      display:flex;
-      align-items:center;
-      margin: auto;
-      justify-content:space-between;
-      gap:10px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow);
-      padding: 12px 14px;
-      border-radius: var(--r2);
-      flex-wrap:wrap;
+      display:flex; align-items:center; margin: auto;
+      justify-content:space-between; gap:10px;
+      border:1px solid var(--line); background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow); padding: 12px 14px;
+      border-radius: var(--r2); flex-wrap:wrap;
     }
     [data-theme="light"] .toggle-container{ background:#fff; }
-    .toggle-container span{
-      font-size: 13px;
-      font-weight:800;
-      color: var(--muted);
-    }
-    .toggle-container #toggleLabel{
-      color: var(--text);
-      font-weight:900;
-    }
+    .toggle-container span{ font-size: 13px; font-weight:800; color: var(--muted); }
+    .toggle-container #toggleLabel{ color: var(--text); font-weight:900; }
 
     .switch{ position: relative; display:inline-block; width:54px; height:28px; }
     .switch input{ display:none; }
@@ -288,13 +193,10 @@
       transition:.25s ease;
     }
     .slider:before{
-      content:"";
-      position:absolute;
-      width:22px; height:22px;
-      left:3px; top:50%;
+      content:""; position:absolute;
+      width:22px; height:22px; left:3px; top:50%;
       transform: translateY(-50%);
-      background:#fff;
-      border-radius:999px;
+      background:#fff; border-radius:999px;
       box-shadow: 0 10px 18px rgba(0,0,0,.25);
       transition:.25s ease;
     }
@@ -307,14 +209,8 @@
       background: #eafff4;
     }
 
-    .results-info{
-      font-size: 13px;
-      color: var(--muted);
-      text-align:center;
-      padding: 6px 0 16px;
-    }
+    .results-info{ font-size: 13px; color: var(--muted); text-align:center; padding: 6px 0 16px; }
 
-    /* ===== Main Grid ===== */
     main{
       width:min(var(--max), calc(100% - 32px));
       margin: 0 auto;
@@ -345,7 +241,6 @@
     .card:hover{ transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.45); }
     [data-theme="light"] .card:hover{ box-shadow: 0 22px 60px rgba(16,24,40,.14); }
 
-    /* Nivel bar (left) */
     .card::before{
       content:"";
       position:absolute; inset:0 auto 0 0;
@@ -358,114 +253,79 @@
     .card[data-nivel="oro"]::before{    background: linear-gradient(180deg, var(--gold1), var(--gold2)); }
     .card[data-nivel="diamante"]::before{background: linear-gradient(180deg, var(--dia1), var(--dia2)); }
 
-    /* Subtle tint by level */
-    .card[data-nivel="oro"]{ box-shadow: 0 18px 60px rgba(184,134,11,.10), var(--shadow); }
-    .card[data-nivel="diamante"]{ box-shadow: 0 18px 60px rgba(59,184,255,.12), var(--shadow); }
-
     .card img{
       width:100%;
-      height: 190px;
+      height: 180px;
       object-fit:cover;
       display:block;
-      filter: saturate(1.05) contrast(1.05) brightness(.92);
+      filter: saturate(1.05) contrast(1.05) brightness(1.3);
       transform: scale(1.02);
       transition: .35s ease;
     }
     .card:hover img{ transform: scale(1.06); }
 
-    .media{
-      position:relative;
-      border-bottom:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-    }
-    .overlay{
-      position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.10), transparent);
-      pointer-events:none;
-      z-index:1;
-    }
+    .media{ position:relative; border-bottom:1px solid var(--line); background: rgba(255,255,255,.05); }
+    .overlay{ position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.10), transparent); pointer-events:none; z-index:1; }
 
-    /* Badges */
     .status{
-      position:absolute;
-      top:12px;
-      left:12px;
-      z-index:3;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 10px;
-      border-radius: 999px;
+      position:absolute; top:12px; left:12px; z-index:3;
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px; border-radius: 999px;
       border:1px solid rgba(255,255,255,.18);
       background: rgba(0,0,0,.38);
       backdrop-filter: blur(10px);
       color: rgba(255,255,255,.92);
-      font-size: 12px;
-      font-weight: 900;
+      font-size: 12px; font-weight: 900;
       white-space:nowrap;
       max-width: calc(100% - 24px);
-      overflow:hidden;
-      text-overflow:ellipsis;
+      overflow:hidden; text-overflow:ellipsis;
     }
-    .status i{ opacity:.95; }
-    .status.open{ border-color: rgba(2, 247, 145, 0.973); box-shadow: 0 0 3px rgb(0, 251, 255);}
+    .status.open{ border-color: rgba(2, 247, 145, 0.973); box-shadow: 0 0 3px rgb(0, 251, 255); }
     .status.closed{ border-color: rgba(255, 0, 0, 0.985); box-shadow: 0 0 3px rgb(236, 37, 11); }
 
     .nivel{
-      position:absolute;
-      top:12px;
-      right:12px;
-      z-index:3;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 900;
+      position:absolute; top:12px; right:12px; z-index:3;
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 9px 12px; border-radius: 999px;
+      font-size: 12px; font-weight: 900;
       letter-spacing:.2px;
       border:1px solid rgba(255,255,255,.18);
       box-shadow: 0 10px 28px rgba(0,0,0,.25);
       backdrop-filter: blur(10px);
       white-space:nowrap;
       max-width: calc(100% - 24px);
-      overflow:hidden;
-      text-overflow:ellipsis;
+      overflow:hidden; text-overflow:ellipsis;
     }
     .nivel[data-nivel="bronce"]{ background: linear-gradient(135deg, rgba(205,127,50,.92), rgba(122,59,17,.76)); color:#fff; }
     .nivel[data-nivel="plata"]{  background: linear-gradient(135deg, rgba(232,237,245,.92), rgba(143,163,183,.72)); color:#101828; }
     .nivel[data-nivel="oro"]{    background: linear-gradient(135deg, rgba(255,209,102,.92), rgba(184,134,11,.70)); color:#2b1b00; }
     .nivel[data-nivel="diamante"]{background: linear-gradient(135deg, rgba(185,242,255,.92), rgba(59,184,255,.70)); color:#002a44; }
 
-    .card-content{
-      padding: 14px 14px 16px;
-    }
-
-    .card-content h3{
-      font-size: 16px;
-      font-weight: 900;
-      text-align: center;
-      
-      letter-spacing:.2px;
-      text-transform: uppercase;
-      line-height:1.2;
-      margin-bottom: 6px;
+    /* ===== NUEVO: badge tipo (pro) ===== */
+    .tipo-badge{
+      position:absolute; left:12px; bottom:12px; z-index:3;
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px; border-radius: 999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.36);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.92);
+      font-size: 12px; font-weight: 900;
       white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .card-content p{
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 700;
-      margin-bottom: 10px;
+      max-width: calc(100% - 24px);
+      overflow:hidden; text-overflow:ellipsis;
     }
 
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
+    .card-content{ padding: 14px 14px 16px; }
+    .card-content h3{
+      font-size: 16px; font-weight: 900; text-align: center;
+      letter-spacing:.2px; text-transform: uppercase;
+      line-height:1.2; margin-bottom: 6px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
+    .card-content p{ font-size: 13px; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+
+    .tags{ display:flex; flex-wrap:wrap; gap:8px; }
     .tag{
       background: rgba(255,255,255,.06);
       border: 1px solid var(--line);
@@ -479,32 +339,17 @@
       max-width: 100%;
     }
     [data-theme="light"] .tag{ background:#f3f6fb; }
-    .tag:hover{
-      transform: translateY(-1px);
-      border-color: rgba(86,207,225,.35);
-      color: var(--text);
-      background: rgba(86,207,225,.10);
-    }
 
-    /* Footer hint row */
     .hint-row{
-      margin-top: 12px;
-      padding-top: 12px;
+      margin-top: 12px; padding-top: 12px;
       border-top: 1px solid var(--line);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; color: var(--muted);
+      font-size: 12px; font-weight: 700;
     }
     .hint-row .go{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      color: var(--text);
-      font-weight: 900;
+      display:inline-flex; align-items:center; gap:8px;
+      color: var(--text); font-weight: 900;
     }
     .hint-row .go i{
       width: 30px; height: 30px;
@@ -514,7 +359,6 @@
       border: 1px solid rgba(86,207,225,.25);
     }
 
-    /* Pagination */
     .pagination{
       grid-column: 1 / -1;
       display:flex;
@@ -523,16 +367,8 @@
       margin-top: 6px;
       flex-wrap:wrap;
     }
-    .pagination button{
-      padding: 10px 14px;
-      border-radius: 14px;
-      font-weight: 900;
-    }
-    .pagination button:disabled{
-      opacity:.5;
-      cursor:not-allowed;
-      transform:none;
-    }
+    .pagination button{ padding: 10px 14px; border-radius: 14px; font-weight: 900; }
+    .pagination button:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
 
     footer{
       margin-top:auto;
@@ -544,12 +380,7 @@
       font-weight:700;
     }
 
-    /* Skeletons */
-    .skeleton{
-      position:relative;
-      overflow:hidden;
-      background: rgba(255,255,255,.05);
-    }
+    .skeleton{ position:relative; overflow:hidden; background: rgba(255,255,255,.05); }
     .skeleton::after{
       content:"";
       position:absolute; inset:-40% -60%;
@@ -557,27 +388,174 @@
       transform: translateX(-40%);
       animation: sk 1.2s ease-in-out infinite;
     }
-    @keyframes sk{
-      0%{ transform: translateX(-60%); }
-      100%{ transform: translateX(60%); }
-    }
+    @keyframes sk{ 0%{ transform: translateX(-60%); } 100%{ transform: translateX(60%); } }
 
-    /* Responsive */
+    /* ===== NUEVO: secciones premium (strips) ===== */
+    .section-strip{
+      grid-column: 1 / -1;
+      border: 1px solid var(--line);
+      border-radius: var(--r2);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    [data-theme="light"] .section-strip{ background:#fff; }
+    .strip-head{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .strip-title{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 900;
+      letter-spacing:.2px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .strip-title i{
+      width: 34px; height: 34px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(86,207,225,.12);
+      border: 1px solid rgba(86,207,225,.25);
+    }
+    .strip-sub{
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      text-align:right;
+      white-space:nowrap;
+    }
+    .strip-body{
+      padding: 12px 14px 14px;
+    }
+    .strip-row{
+      display:flex;
+      gap:12px;
+      overflow-x:auto;
+      padding-bottom: 6px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .strip-row::-webkit-scrollbar{ height:8px; }
+    .strip-row::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.10); border-radius:999px; }
+    [data-theme="light"] .strip-row::-webkit-scrollbar-thumb{ background: rgba(16,24,40,.12); }
+
+    .mini{
+      flex: 0 0 280px;
+      border:1px solid var(--line);
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(255,255,255,.02);
+      box-shadow: var(--shadow2);
+      cursor:pointer;
+      transition: var(--transition);
+      min-width: 240px;
+    }
+    [data-theme="light"] .mini{ background:#fff; }
+    .mini:hover{ transform: translateY(-2px); border-color: rgba(86,207,225,.28); }
+    .mini img{ width:100%; height: 120px; object-fit:cover; display:block; }
+    .mini .mini-content{ padding: 10px 12px 12px; }
+    .mini .mini-title{ font-weight: 900; font-size: 13px; color: var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .mini .mini-meta{ margin-top:6px; font-size: 12px; font-weight: 800; color: var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    /* ===== NUEVO: Ads (no invasivo) ===== */
+    .ad-top{
+      margin-top: 8px;
+      border:1px dashed rgba(86,207,225,.35);
+      border-radius: var(--r2);
+      padding: 12px 14px;
+      box-shadow: var(--shadow2);
+      background: rgba(86,207,225,.06);
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    [data-theme="light"] .ad-top{ background: rgba(86,207,225,.08); }
+    .ad-top .ad-left{ min-width:0; }
+    .ad-top .ad-title{ font-weight: 900; font-size: 13px; color: var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ad-top .ad-desc{ margin-top:4px; font-weight: 800; font-size: 12px; color: var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ad-top .ad-cta{
+      border:1px solid rgba(86,207,225,.35);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight: 900;
+      white-space:nowrap;
+      transition: var(--transition);
+    }
+    [data-theme="light"] .ad-top .ad-cta{ background:#fff; }
+    .ad-top .ad-cta:hover{ transform: translateY(-1px); border-color: rgba(86,207,225,.55); }
+
+    .ad-card{
+      grid-column: span 4;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px dashed rgba(86,207,225,.35);
+      background: rgba(86,207,225,.06);
+      box-shadow: var(--shadow);
+      cursor:pointer;
+      transition: var(--transition);
+      display:none;
+    }
+    [data-theme="light"] .ad-card{ background: rgba(86,207,225,.08); }
+    .ad-card:hover{ transform: translateY(-3px); border-color: rgba(86,207,225,.55); }
+    .ad-card img{ width:100%; height: 180px; object-fit:cover; display:block; }
+    .ad-card .ad-body{ padding: 12px 14px 14px; }
+    .ad-card .ad-h{ font-weight: 900; font-size: 14px; color: var(--text); }
+    .ad-card .ad-p{ margin-top:6px; font-weight: 800; font-size: 12px; color: var(--muted); }
+
+    .ad-sticky{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 80;
+      border: 1px solid rgba(86,207,225,.35);
+      background: rgba(11,18,32,.80);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 12px 12px;
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    [data-theme="light"] .ad-sticky{ background: rgba(255,255,255,.88); }
+    .ad-sticky .txt{ min-width:0; }
+    .ad-sticky .t{ font-weight: 900; font-size: 13px; color: var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ad-sticky .d{ margin-top:4px; font-weight: 800; font-size: 12px; color: var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ad-sticky .x{
+      width: 42px; height: 42px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,77,109,.35);
+      background: rgba(255,77,109,.16);
+      color: #fff;
+      display:grid; place-items:center;
+      cursor:pointer;
+      transition: var(--transition);
+      flex: 0 0 auto;
+    }
+    .ad-sticky .x:hover{ transform: translateY(-1px); border-color: rgba(255,77,109,.65); }
+
     @media (max-width: 980px){
       .card{ grid-column: span 6; }
+      .ad-card{ grid-column: span 6; }
     }
     @media (max-width: 768px){
       header{ padding-bottom: 6px; }
       header h1{ max-width: 100%; }
       .subhead{ max-width: 100%; }
-      .datetime-container{ width:45%;color: #04ff64; margin: auto; }
+      .datetime-container{ width:45%; color: #04ff64; margin: auto; }
       .controls{ width:100%; justify-content:stretch; }
-      select{ width:70%; min-width:0;
-    background: #04151f; }
+      select{ width:70%; min-width:0; background: #04151f; }
     }
     @media (max-width: 640px){
       .container, main{ width: calc(100% - 22px); }
       .card{ grid-column: span 12; }
+      .ad-card{ grid-column: span 12; }
       .card img{ height: 180px; }
     }
   </style>
@@ -590,8 +568,8 @@
         <div class="brand">
           <div class="logo" aria-hidden="true"></div>
           <div>
-            <h1>🏪 GUIA DIGITAL PUBLICITARIA</h1>
-            <div class="subhead">Encontrá lo que buscás a tiempo • IGW Iglesia Web</div>
+            <h1>GUIA DIGITAL PUBLICITARIA</h1>
+            <div class="subhead">Encontrá lo que buscás a tiempo • Iglesia Web </div>
           </div>
         </div>
 
@@ -606,34 +584,39 @@
             <option value="4">Bella Vista</option>
             <option value="5">Villa Iglesia</option>
           </select>
-          <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌞</button>
+          <button class="theme-toggle" id="themeToggle" title="Cambiar tema">☀️</button>
         </div>
       </div>
 
-      <div class="categories">
-        <button class="category-btn active" data-category="todos">✨ Todos</button>
-        <button class="category-btn" data-category="restaurantes">🍽️ Restaurantes</button>
-        <button class="category-btn" data-category="hoteles">🏨 Hoteles</button>
-        <button class="category-btn" data-category="peluquerias">✂️ Peluquerías</button>
-        <button class="category-btn" data-category="maxikioscos">🛒 Maxikioscos</button>
-        <button class="category-btn" data-category="supermercados">🏪 Supermercados</button>
+      <!-- ✅ NUEVO: chips de TIPOS (macro) dinámicos -->
+      <div class="categories" id="tipoChips">
+        <button class="category-btn active" data-tipo="todos">✨ Todos</button>
       </div>
 
       <section class="search-container">
         <div class="search-bar">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="searchInput" placeholder="Buscar por nombre, categoría o tags...">
+          <input type="text" id="searchInput" placeholder="Buscar por nombre, tipo, categoría, descripción o tags...">
         </div>
 
         <div class="toggle-container">
           <span>Ver:</span>
-          <label class="switch" title="Filtrar solo abiertos">
+          <label class="switch" title="Filtrar solo disponibles (abierto/activo)">
             <input type="checkbox" id="toggleActivos" checked>
             <span class="slider"></span>
           </label>
-          <span id="toggleLabel">Solo abiertos</span>
+          <span id="toggleLabel">Solo disponibles</span>
         </div>
       </section>
+
+      <!-- ✅ NUEVO: Top Sponsor (no aparece si no hay ads) -->
+      <a id="adTop" class="ad-top" href="#" target="_blank" rel="noopener" aria-label="Publicidad">
+        <div class="ad-left">
+          <div class="ad-title" id="adTopTitle">Sponsor</div>
+          <div class="ad-desc" id="adTopDesc">Publicidad no invasiva</div>
+        </div>
+        <div class="ad-cta">Ver</div>
+      </a>
 
       <div class="results-info" id="resultsInfo"></div>
     </div>
@@ -641,9 +624,16 @@
 
   <main id="vendorsList"></main>
 
-  <footer>
-    IGW - IGLESIA WEB
-  </footer>
+  <footer>IGW - IGLESIA WEB</footer>
+
+  <!-- ✅ NUEVO: sticky mini banner (cerrable) -->
+  <div id="adSticky" class="ad-sticky" role="dialog" aria-label="Publicidad">
+    <div class="txt">
+      <div class="t" id="adStickyTitle">Publicidad</div>
+      <div class="d" id="adStickyDesc">Espacio reservado</div>
+    </div>
+    <div class="x" id="adStickyClose" aria-label="Cerrar">×</div>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -664,26 +654,79 @@
     const contenedor = document.getElementById('vendorsList');
     const input = document.getElementById('searchInput');
     const selectDistrito = document.getElementById('districtSelect');
-    const categoryBtns = document.querySelectorAll('.category-btn');
     const checkbox = document.getElementById('toggleActivos');
     const label = document.getElementById('toggleLabel');
     const resultsInfo = document.getElementById('resultsInfo');
     const datetimeEl = document.getElementById('datetime');
     const themeToggle = document.getElementById('themeToggle');
+    const tipoChips = document.getElementById('tipoChips');
+
+    const adTop = document.getElementById('adTop');
+    const adTopTitle = document.getElementById('adTopTitle');
+    const adTopDesc = document.getElementById('adTopDesc');
+
+    const adSticky = document.getElementById('adSticky');
+    const adStickyTitle = document.getElementById('adStickyTitle');
+    const adStickyDesc = document.getElementById('adStickyDesc');
+    const adStickyClose = document.getElementById('adStickyClose');
+
+    // ✅ CONFIG
+    const THEME_KEY = "igw_theme"; // localStorage
+    const HIDE_EXPIRED_ALWAYS = true; // ocultar vencidos
+    const itemsPerPage = 20;
+    const maxDistanceKm = 10;
+
+    // Ads: insertar cada N cards (si hay ads disponibles)
+    const AD_EVERY_N = 10;
 
     let mostrarSoloActivos = true;
     let vendedores = [];
     let currentPage = 1;
-    const itemsPerPage = 20;
-    let selectedCategory = 'todos';
+    let selectedTipo = 'todos';
     let userLocation = null;
-    const maxDistanceKm = 10;
 
-    // ===== Theme (no changes to your data/buttons)
+    let ads = []; // colección ads (opcional)
+    let adIndex = 0;
+
+    // ===== Pago/vencimiento helpers =====
+    function computeEstadoPago(v){
+      const diasGracia = Number(v.diasGracia ?? 3);
+      if(!v.vencimiento) return "activo";
+      const venc = v.vencimiento?.toDate ? v.vencimiento.toDate() : new Date(v.vencimiento);
+      const now = new Date();
+      const endGrace = new Date(venc.getTime() + diasGracia * 86400000);
+      if(now <= venc) return "activo";
+      if(now > venc && now <= endGrace) return "en_gracia";
+      return "vencido";
+    }
+    function isVisibleByPayment(v){
+      const activo = (v.activo !== false);
+      if(!activo) return false;
+
+      const estado = (v.estadoPago || computeEstadoPago(v));
+      if(estado === "vencido") return false;
+
+      return true;
+    }
+
+    // ===== Theme persistente (localStorage) =====
+    function applyTheme(theme){
+      document.body.dataset.theme = (theme === 'dark') ? 'dark' : 'light';
+      themeToggle.textContent = document.body.dataset.theme === 'dark' ? '🌙' : '☀️';
+    }
+    function initTheme(){
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved === 'dark' || saved === 'light'){
+        applyTheme(saved);
+        return;
+      }
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(prefersDark ? 'dark' : 'light');
+    }
     function toggleTheme() {
-      const currentTheme = document.body.dataset.theme;
-      document.body.dataset.theme = currentTheme === 'dark' ? 'light' : 'dark';
-      themeToggle.textContent = document.body.dataset.theme === 'dark' ? '🌙' : '🌞';
+      const next = (document.body.dataset.theme === 'dark') ? 'light' : 'dark';
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
     }
     themeToggle.addEventListener('click', toggleTheme);
 
@@ -707,35 +750,79 @@
       return R * c;
     }
 
-    // ===== Geolocalización (kept)
+    // ===== Geolocalización
     function getUserLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            userLocation = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
+            userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
 
             if (!document.querySelector('option[value="cerca"]')) {
               const option = document.createElement('option');
               option.value = 'cerca';
-              option.textContent = '📍 Cerca de mí';
+              option.textContent = '📌 Cerca de mí';
               selectDistrito.prepend(option);
             }
             selectDistrito.value = 'cerca';
-            renderVendedores();
+            renderAll();
           },
-          () => renderVendedores(),
+          () => renderAll(),
           { enableHighAccuracy: true, timeout: 8000 }
         );
       } else {
-        renderVendedores();
+        renderAll();
       }
     }
 
-    // ===== Lógica de horario (kept)
-    function estaAbierto(v) {
+    // ===== Normalizadores para “todo todo”
+    function normTipo(t){
+      const v = (t || 'comercio').toString().toLowerCase().trim();
+      // alias útiles (por si cargan distinto)
+      const alias = {
+        "profesionales":"profesional",
+        "servicios":"servicio",
+        "transportes":"transporte",
+        "comercios":"comercio",
+        "eventos":"evento",
+        "turístico":"turismo",
+        "punto de interés":"turismo",
+        "poi":"turismo",
+        "delivery sin local":"delivery"
+      };
+      return alias[v] || v || 'comercio';
+    }
+
+    const TIPO_META = {
+      todos: { label:"Todos", icon:"✨" },
+      profesional: { label:"Profesionales", icon:"👤" },
+      servicio: { label:"Servicios", icon:"🧰" },
+      transporte: { label:"Transporte", icon:"🚕" },
+      comercio: { label:"Comercios", icon:"🏪" },
+      farmacia: { label:"Farmacias", icon:"💊" },
+      delivery: { label:"Delivery", icon:"🍔" },
+      turismo: { label:"Turismo", icon:"🏞️" },
+      evento: { label:"Eventos", icon:"🎉" }
+    };
+
+    // orden pro (si existe en datos)
+    const TIPO_ORDER = ["todos","profesional","servicio","transporte","comercio","farmacia","delivery","turismo","evento"];
+
+    function tipoBadgeText(tipo){
+      const t = normTipo(tipo);
+      const m = TIPO_META[t];
+      if(m) return `${m.icon} ${m.label}`;
+      return `📌 ${t.charAt(0).toUpperCase() + t.slice(1)}`;
+    }
+
+    // ===== Abierto / Disponible (adaptado por tipo)
+    function parseDateMaybe(d){
+      if(!d) return null;
+      if(d.toDate) return d.toDate();
+      const dt = new Date(d);
+      return isNaN(dt.getTime()) ? null : dt;
+    }
+
+    function estaAbiertoHorario(v) {
       const ahora = new Date();
       const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
       const diaActual = diasSemana[ahora.getDay()];
@@ -753,18 +840,75 @@
 
       return franjasDelDia.some(h => {
         if (!h.apertura || !h.cierre) return false;
-
         const [hA, mA] = h.apertura.split(':').map(Number);
         const [hC, mC] = h.cierre.split(':').map(Number);
         const horaA = hA + mA / 60;
         const horaC = hC + mC / 60;
-
         if (horaA > horaC) return horaActual >= horaA || horaActual < horaC;
         return horaActual >= horaA && horaActual < horaC;
       });
     }
 
-    // ===== Nivel badge HTML (kept concept, improved visuals)
+    // devuelve { ok: boolean, label: string, kind: "open"|"closed"|"turnos"|"evento"|"turismo" }
+    function disponibilidad(v){
+      const tipo = normTipo(v.tipo);
+
+      // Profesionales “con turno”
+      const modalidad = (v.modalidad || '').toString().toLowerCase().trim();
+      if(tipo === 'profesional' && modalidad === 'turnos'){
+        return { ok:true, label:"Con turno", kind:"turnos" };
+      }
+
+      // Eventos: activo por fechaInicio/fechaFin
+      if(tipo === 'evento'){
+        const ini = parseDateMaybe(v.fechaInicio || v.inicio || v.startDate);
+        const fin = parseDateMaybe(v.fechaFin || v.fin || v.endDate);
+        const now = new Date();
+        if(ini && fin){
+          const ok = (now >= ini && now <= fin);
+          return { ok, label: ok ? "En curso" : (now < ini ? "Próximo" : "Finalizado"), kind: ok ? "open" : "closed" };
+        }
+        if(ini && !fin){
+          const ok = now >= ini;
+          return { ok, label: ok ? "Activo" : "Próximo", kind: ok ? "open" : "closed" };
+        }
+        // si no hay fechas, no lo descartamos: lo mostramos como “Evento”
+        return { ok:true, label:"Evento", kind:"evento" };
+      }
+
+      // Turismo / POI: si no hay horarios, no lo mates
+      if(tipo === 'turismo'){
+        const hasHorario = !!(v.horarios && typeof v.horarios === 'object');
+        if(!hasHorario) return { ok:true, label:"Visitable", kind:"turismo" };
+        const ok = estaAbiertoHorario(v);
+        return { ok, label: ok ? "Abierto" : "Cerrado", kind: ok ? "open" : "closed" };
+      }
+
+      // Transporte: si marca 24hs/nocturno (si existe), lo consideramos disponible
+      if(tipo === 'transporte'){
+        const disp = (v.disponibilidad || v.turno || '').toString().toLowerCase();
+        if(disp.includes('24') || disp.includes('24hs') || disp.includes('noct') || disp.includes('siempre')){
+          return { ok:true, label:"Disponible", kind:"open" };
+        }
+        // si tiene horario, usamos horario
+        const ok = estaAbiertoHorario(v);
+        return { ok, label: ok ? "Disponible" : "No disponible", kind: ok ? "open" : "closed" };
+      }
+
+      // Farmacia: puede ser “de turno”
+      if(tipo === 'farmacia'){
+        const turno = (v.turno || v.deTurno || '').toString().toLowerCase();
+        if(turno === 'si' || turno === 'true') return { ok:true, label:"De turno", kind:"open" };
+        const ok = estaAbiertoHorario(v);
+        return { ok, label: ok ? "Abierta" : "Cerrada", kind: ok ? "open" : "closed" };
+      }
+
+      // Default (comercio/servicio/delivery/etc.)
+      const ok = estaAbiertoHorario(v);
+      return { ok, label: ok ? "Abierto ahora" : "Cerrado", kind: ok ? "open" : "closed" };
+    }
+
+    // ===== Nivel
     function getNivelHtml(nivel) {
       switch ((nivel || '').toLowerCase()) {
         case 'bronce': return '<i class="fas fa-medal"></i> Bronce';
@@ -774,15 +918,13 @@
         default: return '<i class="fas fa-medal"></i> Bronce';
       }
     }
-
-    // ===== Nivel ranking (NEW: order by level, no DB changes)
     const nivelRank = { diamante: 0, oro: 1, plata: 2, bronce: 3 };
     function normNivel(n){
       const v = (n || 'bronce').toString().toLowerCase().trim();
       return ['bronce','plata','oro','diamante'].includes(v) ? v : 'bronce';
     }
 
-    // ===== Skeletons (NEW: feels pro while loading)
+    // ===== Skeletons
     function paintSkeletons(count = 12){
       contenedor.innerHTML = '';
       for(let i=0;i<count;i++){
@@ -812,45 +954,265 @@
       }
     }
 
-    function renderVendedores() {
+    // ===== Chips dinámicos por TIPOS
+    function buildTipoChipsFromData(list){
+      const present = new Set();
+      list.forEach(v => present.add(normTipo(v.tipo)));
+
+      // limpiar y reconstruir
+      tipoChips.innerHTML = '';
+      const ordered = [...TIPO_ORDER];
+
+      // incluir extras (si cargan tipos nuevos)
+      const extras = [...present].filter(t => !ordered.includes(t)).sort((a,b)=>a.localeCompare(b,'es',{sensitivity:'base'}));
+      const finalList = [...ordered, ...extras];
+
+      finalList.forEach(t => {
+        if(t !== 'todos' && !present.has(t)) return; // solo mostrar los que existen
+        const btn = document.createElement('button');
+        btn.className = 'category-btn' + (t === 'todos' ? ' active' : '');
+        btn.dataset.tipo = t;
+
+        const meta = TIPO_META[t];
+        btn.textContent = meta ? `${meta.icon} ${meta.label}` : `📌 ${t.charAt(0).toUpperCase()+t.slice(1)}`;
+
+        btn.addEventListener('click', () => {
+          [...tipoChips.querySelectorAll('.category-btn')].forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedTipo = t;
+          currentPage = 1;
+          renderAll();
+        });
+
+        tipoChips.appendChild(btn);
+      });
+    }
+
+    // ===== Ads (opcionales)
+    function isAdActive(a){
+      if(a?.activo === false) return false;
+      const now = new Date();
+      const ini = parseDateMaybe(a.fechaInicio || a.inicio);
+      const fin = parseDateMaybe(a.fechaFin || a.fin);
+      if(ini && now < ini) return false;
+      if(fin && now > fin) return false;
+      return true;
+    }
+    function safeUrl(u){
+      const s = (u || '').toString().trim();
+      if(!s) return '';
+      if(!/^https?:\/\//i.test(s)) return '';
+      return s;
+    }
+    async function loadAds(){
+      try{
+        const snap = await getDocs(collection(db, "ads"));
+        ads = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+          .filter(isAdActive)
+          .sort((a,b) => (Number(b.prioridad||0) - Number(a.prioridad||0)));
+
+        // Top sponsor
+        const top = ads.find(a => (a.ubicacion || '').toString().toLowerCase().includes('top')) || ads[0];
+        if(top){
+          const url = safeUrl(top.link);
+          if(url){
+            adTop.href = url;
+            adTopTitle.textContent = top.titulo || "Sponsor";
+            adTopDesc.textContent = top.descripcion || "Apoyo local";
+            adTop.style.display = "flex";
+          }
+        }
+
+        // Sticky (si existe)
+        const sticky = ads.find(a => (a.ubicacion || '').toString().toLowerCase().includes('footer')) || ads.find(a => (a.ubicacion || '').toString().toLowerCase().includes('sticky'));
+        const stickyHidden = localStorage.getItem("igw_ad_sticky_closed") === "1";
+        if(sticky && !stickyHidden){
+          const url = safeUrl(sticky.link);
+          if(url){
+            adSticky.style.display = "flex";
+            adStickyTitle.textContent = sticky.titulo || "Publicidad";
+            adStickyDesc.textContent = sticky.descripcion || "Espacio reservado";
+            adSticky.onclick = (e) => {
+              if(e.target === adStickyClose) return;
+              window.open(url, "_blank", "noopener");
+            };
+          }
+        }
+      } catch(e){
+        // si no existe la colección ads todavía, no hacemos nada
+        ads = [];
+      }
+    }
+
+    adStickyClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      adSticky.style.display = "none";
+      localStorage.setItem("igw_ad_sticky_closed", "1");
+    });
+
+    function nextAdForCard(){
+      if(!ads.length) return null;
+      // usar ads marcados para "grid" si existen
+      const gridAds = ads.filter(a => (a.ubicacion || '').toString().toLowerCase().includes('grid'));
+      const pool = gridAds.length ? gridAds : ads;
+      const a = pool[adIndex % pool.length];
+      adIndex++;
+      const url = safeUrl(a.link);
+      if(!url) return null;
+      return { ...a, link: url };
+    }
+
+    function renderAdCard(a){
+      const div = document.createElement('div');
+      div.className = 'ad-card';
+      div.style.display = 'block';
+      const img = (a.imagen || a.img || '').toString().trim();
+      div.innerHTML = `
+        ${img ? `<img src="${img}" alt="${a.titulo || 'Publicidad'}" loading="lazy" decoding="async">` : ``}
+        <div class="ad-body">
+          <div class="ad-h"><i class="fa-solid fa-bullhorn"></i> ${a.titulo || 'Publicidad'}</div>
+          <div class="ad-p">${a.descripcion || 'Espacio listo para futuras campañas.'}</div>
+        </div>
+      `;
+      div.addEventListener('click', () => window.open(a.link, "_blank", "noopener"));
+      return div;
+    }
+
+    // ===== Secciones premium (eventos/turismo/destacados)
+    function renderStrip({iconClass, title, subtitle, items}){
+      if(!items || items.length === 0) return null;
+
+      const wrap = document.createElement('section');
+      wrap.className = 'section-strip';
+
+      wrap.innerHTML = `
+        <div class="strip-head">
+          <div class="strip-title"><i class="${iconClass}"></i> ${title}</div>
+          <div class="strip-sub">${subtitle || ''}</div>
+        </div>
+        <div class="strip-body">
+          <div class="strip-row"></div>
+        </div>
+      `;
+
+      const row = wrap.querySelector('.strip-row');
+
+      items.forEach(v => {
+        const mini = document.createElement('div');
+        mini.className = 'mini';
+
+        const cat = (v.categoria || v.tipo || 'Sin categoría').toString();
+        const img = (v.imagen || '').toString();
+        mini.innerHTML = `
+          ${img ? `<img src="${img}" alt="${v.nombre || 'Item'}" loading="lazy" decoding="async">` : ``}
+          <div class="mini-content">
+            <div class="mini-title" title="${v.nombre || ''}">${v.nombre || 'Sin nombre'}</div>
+            <div class="mini-meta">${tipoBadgeText(v.tipo)} • ${cat}</div>
+          </div>
+        `;
+        mini.addEventListener('click', () => {
+          window.location.href = `detalle.html?id=${v.id}`;
+        });
+        row.appendChild(mini);
+      });
+
+      return wrap;
+    }
+
+    // ===== Render completo (secciones + grid)
+    function renderAll(){
       contenedor.innerHTML = '';
-      const busqueda = input.value.toLowerCase();
+
+      const busqueda = input.value.toLowerCase().trim();
       const distrito = selectDistrito.value;
 
-      let filtrados = vendedores.filter(v =>
-        (v.nombre && v.nombre.toLowerCase().includes(busqueda)) ||
-        (v.categoria && v.categoria.toLowerCase().includes(busqueda)) ||
-        (v.tags && v.tags.some(tag => tag.toLowerCase().includes(busqueda)))
-      );
+      // 1) base list + pago
+      let list = [...vendedores];
 
-      // Distrito / Cerca (kept)
+      if(HIDE_EXPIRED_ALWAYS){
+        list = list.filter(v => isVisibleByPayment(v));
+      }
+
+      // 2) distrito / cerca
       if (distrito === 'cerca' && userLocation) {
-        filtrados = filtrados.filter(v => {
+        list = list.filter(v => {
           if (!v.ubicacion) return false;
           const distance = getDistance(userLocation.lat, userLocation.lng, v.ubicacion.lat, v.ubicacion.lng);
           return distance <= maxDistanceKm;
         });
       } else if (distrito !== 'todos') {
-        filtrados = filtrados.filter(v => v.distrito == distrito);
+        list = list.filter(v => String(v.distrito) === String(distrito));
       }
 
-      // Categoría (kept)
-      if (selectedCategory !== 'todos') {
-        filtrados = filtrados.filter(v => v.categoria === selectedCategory);
+      // 3) filtro tipo (macro)
+      if(selectedTipo !== 'todos'){
+        list = list.filter(v => normTipo(v.tipo) === selectedTipo);
       }
 
-      // Abiertos (kept)
-      if (mostrarSoloActivos) {
-        filtrados = filtrados.filter(v => estaAbierto(v));
+      // 4) búsqueda más inteligente (nombre + tipo + categoria + tags + descripcion + profesion)
+      if(busqueda){
+        list = list.filter(v => {
+          const nombre = (v.nombre || '').toString().toLowerCase();
+          const tipo = normTipo(v.tipo);
+          const categoria = (v.categoria || v.tipo || '').toString().toLowerCase();
+          const desc = (v.descripcion || '').toString().toLowerCase();
+          const profesion = (v.profesion || v.especialidad || '').toString().toLowerCase();
+          const tags = Array.isArray(v.tags) ? v.tags.join(' ').toLowerCase() : '';
+          return (
+            nombre.includes(busqueda) ||
+            tipo.includes(busqueda) ||
+            categoria.includes(busqueda) ||
+            desc.includes(busqueda) ||
+            profesion.includes(busqueda) ||
+            tags.includes(busqueda)
+          );
+        });
       }
 
-      // ✅ NEW: Orden por nivel (sin tocar Firestore/campos)
-      filtrados.sort((a,b) => {
+      // 5) Solo disponibles (abierto/activo)
+      if(mostrarSoloActivos){
+        list = list.filter(v => disponibilidad(v).ok);
+      }
+
+      // ===== Secciones premium (solo si NO estás en búsqueda fuerte, para que no estorbe)
+      const showPremium = !busqueda && selectedTipo === 'todos' && currentPage === 1;
+
+      if(showPremium){
+        // Eventos vigentes / próximos
+        const eventos = vendedores
+          .filter(v => normTipo(v.tipo) === 'evento')
+          .filter(v => {
+            const st = disponibilidad(v);
+            return st.label === "En curso" || st.label === "Próximo" || st.kind === "evento";
+          })
+          .slice(0, 10);
+
+        // Turismo / puntos de interés
+        const turismo = vendedores
+          .filter(v => normTipo(v.tipo) === 'turismo')
+          .slice(0, 10);
+
+        // Destacados (diamante/oro)
+        const destacados = vendedores
+          .filter(v => ['diamante','oro'].includes(normNivel(v.nivel)))
+          .sort((a,b) => (nivelRank[normNivel(a.nivel)] - nivelRank[normNivel(b.nivel)]))
+          .slice(0, 10);
+
+        const s1 = renderStrip({ iconClass:"fa-solid fa-calendar-star", title:"Eventos destacados", subtitle:"Enterate de lo que hay", items:eventos });
+        const s2 = renderStrip({ iconClass:"fa-solid fa-mountain-sun", title:"Turismo & Puntos de interés", subtitle:"Lugares para visitar", items:turismo });
+        const s3 = renderStrip({ iconClass:"fa-solid fa-crown", title:"Destacados", subtitle:"Los mejor posicionados", items:destacados });
+
+        if(s1) contenedor.appendChild(s1);
+        if(s2) contenedor.appendChild(s2);
+        if(s3) contenedor.appendChild(s3);
+      }
+
+      // ===== Orden pro (grid): nivel > vistos > nombre
+      list.sort((a,b) => {
         const ra = nivelRank[normNivel(a.nivel)] ?? 99;
         const rb = nivelRank[normNivel(b.nivel)] ?? 99;
         if (ra !== rb) return ra - rb;
 
-        // Desempate: más vistos primero (si existe) y luego nombre
         const va = (a.visualizaciones || 0);
         const vb = (b.visualizaciones || 0);
         if (vb !== va) return vb - va;
@@ -858,26 +1220,36 @@
         return (a.nombre || '').localeCompare((b.nombre || ''), 'es', { sensitivity:'base' });
       });
 
-      // Paginación (kept)
-      const totalPages = Math.max(1, Math.ceil(filtrados.length / itemsPerPage));
+      const totalPages = Math.max(1, Math.ceil(list.length / itemsPerPage));
       if (currentPage > totalPages) currentPage = totalPages;
 
       const start = (currentPage - 1) * itemsPerPage;
       const end = start + itemsPerPage;
-      const pageItems = filtrados.slice(start, end);
+      const pageItems = list.slice(start, end);
 
-      resultsInfo.textContent = `Mostrando ${pageItems.length} de ${filtrados.length} resultados (Página ${currentPage} de ${totalPages})`;
+      resultsInfo.textContent = `Mostrando ${pageItems.length} de ${list.length} resultados (Página ${currentPage} de ${totalPages})`;
 
       if (pageItems.length === 0) {
-        contenedor.innerHTML = `<p style="grid-column:1/-1;text-align:center; color:var(--muted); padding:18px 0;">😕 No se encontraron resultados</p>`;
+        contenedor.innerHTML += `<p style="grid-column:1/-1;text-align:center; color:var(--muted); padding:18px 0;">😕 No se encontraron resultados</p>`;
         return;
       }
 
-      pageItems.forEach(v => {
-        const activo = estaAbierto(v);
+      // ===== Render cards + Ads insertables
+      let renderedCards = 0;
+
+      pageItems.forEach((v, idx) => {
+        // insertar ad cada N cards (si hay ads) — no invasivo y opcional
+        if(ads.length && renderedCards > 0 && (renderedCards % AD_EVERY_N === 0)){
+          const a = nextAdForCard();
+          if(a){
+            contenedor.appendChild(renderAdCard(a));
+          }
+        }
+
+        const st = disponibilidad(v);
         const tagsHTML = (v.tags || []).slice(0, 7).map(t => `<span class="tag">${t}</span>`).join('');
         const nivel = normNivel(v.nivel);
-        const categoria = v.categoria || 'Sin categoría';
+        const categoria = (v.categoria || v.tipo || 'Sin categoría');
 
         const card = document.createElement('div');
         card.className = 'card';
@@ -885,19 +1257,20 @@
 
         card.innerHTML = `
           <div class="media">
-            <img src="${v.imagen}" alt="${v.nombre}" loading="lazy" decoding="async">
+            <img src="${v.imagen || ''}" alt="${v.nombre || ''}" loading="lazy" decoding="async">
             <div class="overlay" aria-hidden="true"></div>
 
-            <span class="status ${activo ? 'open' : 'closed'}">
-              <i class="fa-solid ${activo ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
-              ${activo ? 'Abierto ahora' : 'Cerrado'}
+            <span class="status ${st.ok ? 'open' : 'closed'}">
+              <i class="fa-solid ${st.ok ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+              ${st.label}
             </span>
 
             <span class="nivel" data-nivel="${nivel}">${getNivelHtml(nivel)}</span>
+            <span class="tipo-badge">${tipoBadgeText(v.tipo)}</span>
           </div>
 
           <div class="card-content">
-            <h3 title="${v.nombre}">${v.nombre}</h3>
+            <h3 title="${v.nombre || ''}">${v.nombre || 'Sin nombre'}</h3>
             <p>${categoria}</p>
             <div class="tags">${tagsHTML}</div>
 
@@ -908,15 +1281,14 @@
           </div>
         `;
 
-        // Click behavior (kept: NO new buttons, NO field changes)
         card.addEventListener('click', () => {
+          // Nota: hoy suma en index. Si en detalle también suma, vas a duplicar.
           updateDoc(doc(db, "comercios", v.id), {
             visualizaciones: (v.visualizaciones || 0) + 1
-          });
+          }).catch(()=>{});
           window.location.href = `detalle.html?id=${v.id}`;
         });
 
-        // Lazy appear (kept, improved rootMargin)
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -928,28 +1300,23 @@
         observer.observe(card);
 
         contenedor.appendChild(card);
+        renderedCards++;
       });
 
-      // Pagination (kept)
+      // paginación
       const pagination = document.createElement('div');
       pagination.className = 'pagination';
 
       const prevBtn = document.createElement('button');
       prevBtn.textContent = 'Anterior';
       prevBtn.disabled = currentPage <= 1;
-      prevBtn.addEventListener('click', () => {
-        currentPage--;
-        renderVendedores();
-      });
+      prevBtn.addEventListener('click', () => { currentPage--; renderAll(); });
       pagination.appendChild(prevBtn);
 
       const nextBtn = document.createElement('button');
       nextBtn.textContent = 'Siguiente';
       nextBtn.disabled = currentPage >= totalPages;
-      nextBtn.addEventListener('click', () => {
-        currentPage++;
-        renderVendedores();
-      });
+      nextBtn.addEventListener('click', () => { currentPage++; renderAll(); });
       pagination.appendChild(nextBtn);
 
       contenedor.appendChild(pagination);
@@ -960,54 +1327,43 @@
 
       try {
         const snapshot = await getDocs(collection(db, "comercios"));
-        vendedores = snapshot.docs.map(docu => ({
-          id: docu.id,
-          ...docu.data()
-        }));
-        getUserLocation(); // kept: geolocalización after load
+        vendedores = snapshot.docs.map(docu => {
+          const data = docu.data() || {};
+          // compat: si no hay tipo, asumimos comercio
+          if(!data.tipo) data.tipo = "comercio";
+          return { id: docu.id, ...data };
+        });
+
+        // chips dinámicos por tipo
+        buildTipoChipsFromData(vendedores);
+
+        // ads (opcional)
+        await loadAds();
+
+        getUserLocation(); // esto llama renderAll
       } catch (e) {
         console.error("Error al cargar", e);
-        contenedor.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#ff4d6d;padding:18px 0;">Error al cargar comercios.</p>`;
+        contenedor.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#ff4d6d;padding:18px 0;">Error al cargar datos.</p>`;
       }
     }
 
-    // Events (kept)
-    input.addEventListener('input', () => {
-      currentPage = 1;
-      renderVendedores();
-    });
-    selectDistrito.addEventListener('change', () => {
-      currentPage = 1;
-      renderVendedores();
-    });
-    categoryBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        categoryBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        selectedCategory = btn.dataset.category;
-        currentPage = 1;
-        renderVendedores();
-      });
-    });
+    // ===== Eventos UI
+    input.addEventListener('input', () => { currentPage = 1; renderAll(); });
+    selectDistrito.addEventListener('change', () => { currentPage = 1; renderAll(); });
+
     checkbox.addEventListener('change', () => {
       mostrarSoloActivos = checkbox.checked;
-      label.textContent = checkbox.checked ? "Solo abiertos" : "Todos los locales";
+      label.textContent = checkbox.checked ? "Solo disponibles" : "Todos";
       currentPage = 1;
-      renderVendedores();
+      renderAll();
     });
 
-    // Default theme (kept)
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.body.dataset.theme = 'dark';
-      themeToggle.textContent = '🌙';
-    }
-
+    // ===== Init
+    initTheme();
     cargarComercios();
 
-    // Refresh open/close
-    setInterval(() => {
-      renderVendedores();
-    }, 60000);
+    // refresco suave (estado abierto/cerrado)
+    setInterval(() => { renderAll(); }, 60000);
   </script>
 </body>
 </html>
